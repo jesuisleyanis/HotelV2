@@ -14,5 +14,8 @@
     <p>Découvrez hotel Neptune un superbe hotel qui propose une exprérience innoubliable</p>
     <a href="login.php">Se connecter</a>
     <a href="register.php">S'inscrire</a>
+    <form action="test_connection.php" method="post">
+        <button type="submit" name="testConnection">Tester la connexion</button>
+    </form>
 </body>
 </html>

@@ -1,3 +1,17 @@
+<?php
+include 'php/auth.php';
+
+$auth = new Auth();
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if ($auth->register($_POST)) {
+        echo "Inscription réussie!";
+    } else {
+        echo "Erreur lors de l'inscription.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -11,7 +25,7 @@
 
 <body>
     <div class="container py-4">
-        <form action="post" class="row justify-content-center">
+        <form action="register.php" method="post" class="row justify-content-center">
             <div class="col-md-4 mb-3">
                 <label for="name" class="form-label">Nom</label>
                 <input type="text" name="nom" id="nom" class="form-control">
@@ -29,12 +43,15 @@
                 <input type="password" name="password" id="password" class="form-control">
             </div>
             <div class="col-md-8">
-                <label for="adress" class="form-label">adresse</label>
+                <label for="adress" class="form-label">Adresse</label>
                 <input type="adress" name="adress" id="adress" class="form-control">
             </div>
             <div class="col-md-8">
                 <label for="num" class="form-label">Numéo de téléphone</label>
                 <input type="number" name="num" id="num" class="form-control">
+            </div>
+            <div class="col-md-8 py-3">
+                <button class="btn btn-primary" type="submit">Envoyer</button>
             </div>
         </form>
     </div>
