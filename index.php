@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,12 +12,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </head>
 <body>
+    <?php
+    session_start();
+    if (isset($_SESSION['user_name'])) {
+        echo "Bonjour, " . $_SESSION['user_name'] . "!";
+    } 
+    ?>
     <h1>Hotel neptune</h1>
     <p>Découvrez hotel Neptune un superbe hotel qui propose une exprérience innoubliable</p>
     <a href="login.php">Se connecter</a>
     <a href="register.php">S'inscrire</a>
-    <form action="test_connection.php" method="post">
-        <button type="submit" name="testConnection">Tester la connexion</button>
-    </form>
 </body>
 </html>

@@ -23,7 +23,7 @@ class Auth {
     
     }
 
-    public function register($postData) {
+    public function register() {
         $nom = $this->testPostValue("nom");
         $prenom = $this->testPostValue("prenom");
         $mail = $this->testPostValue("mail");
@@ -45,6 +45,41 @@ class Auth {
     
         return $stmt->execute([$nom, $prenom, $mail, $hashedPassword, $adress, $num]);
     }
+
+
+    public function login() {
+        session_start();    
+    
+        if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+            return false;
+        }
+    
+        $mail = $_POST["mail"];
+        $password = $_POST["password"];
+    
+        if (!$mail || !$password) {
+            echo "Mail ou mot de passe manquant.";
+            return false;  
+        }
+    
+        $conn = $this->getConnection();
+    
+        $sql = "SELECT * FROM client WHERE mail = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$mail]);
+    
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($user && password_verify($password, $user['password'])) {
+            $_SESSION['user_name'] = $user['nom'];  // Sauvegarde du nom de l'utilisateur dans la session
+            header("location: index.php");
+            exit();
+        } else {
+            echo "Mail ou mot de passe incorrect.";
+            return false;
+        }
+    }
+    
 }
     
 
