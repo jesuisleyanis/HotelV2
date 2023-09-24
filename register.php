@@ -2,7 +2,8 @@
 include 'php/auth.php';
 
 $auth = new Auth();
-
+?>
+<?php
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($auth->register($_POST)) {
         echo "Inscription réussie!";
@@ -26,6 +27,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
     <div class="container py-4">
         <form action="register.php" method="post" class="row justify-content-center">
+            <div class="col-mb-8">
+            <?php
+                if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                    if ($auth->register($_POST)) {
+                        echo "Inscription réussie!";
+                    } else {
+                        echo "Erreur lors de l'inscription.";
+                    }
+                }
+            ?>
+            </div>
             <div class="col-md-4 mb-3">
                 <label for="name" class="form-label">Nom</label>
                 <input type="text" name="nom" id="nom" class="form-control">
